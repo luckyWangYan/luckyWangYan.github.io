@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="存储单元位（bit）：一个数字0或者一个数字1代表一位 字节（Byte）：每逢8位是一个字节，字节是数据存储的最小单位 1Byte&#x3D;8bit 1KB&#x3D;1024Byte 1MB&#x3D;1024KB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础">
+<meta property="og:url" content="https://github.com/luckyWangYan/luckyWangYan.github.io/2021/04/27/java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Wang Yan&#39;s Blog">
+<meta property="og:description" content="存储单元位（bit）：一个数字0或者一个数字1代表一位 字节（Byte）：每逢8位是一个字节，字节是数据存储的最小单位 1Byte&#x3D;8bit 1KB&#x3D;1024Byte 1MB&#x3D;1024KB">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210331203552556.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210331203759419.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210401202810310.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190407171115204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3oxd2Vi,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210401102037784.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210401144728237.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210401205305698.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210406111106360.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210406205158848.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210408142705286.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210408164930404.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210409131513584.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/05-%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8A%E4%B8%8B%E8%BD%AC%E5%9E%8B.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210410131339492.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/01_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/%E5%A2%9E%E5%8A%A0%E7%BB%93%E7%82%B9.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B9.bmp">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/%E5%93%88%E5%B8%8C%E8%A1%A8.png">
+<meta property="og:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/%E5%93%88%E5%B8%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+<meta property="article:published_time" content="2021-04-27T04:55:00.000Z">
+<meta property="article:modified_time" content="2021-04-27T06:26:08.194Z">
+<meta property="article:author" content="王延">
+<meta property="article:tag" content="java基础">
+<meta property="article:tag" content="编程语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/java%E5%9F%BA%E7%A1%80/image-20210331203552556.png">
+
+
+<link rel="canonical" href="https://github.com/luckyWangYan/luckyWangYan.github.io/2021/04/27/java%E5%9F%BA%E7%A1%80/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>java基础 | Wang Yan's Blog</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Wang Yan's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83"><span class="nav-number">1.</span> <span class="nav-text">存储单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cmd"><span class="nav-number">2.</span> <span class="nav-text">cmd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9AJVM"><span class="nav-number">3.</span> <span class="nav-text">java虚拟机：JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JRE%E5%92%8CJDK"><span class="nav-number">4.</span> <span class="nav-text">JRE和JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E5%86%85%E5%AD%98%E5%88%92%E5%88%86"><span class="nav-number">5.</span> <span class="nav-text">JVM内存划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">6.</span> <span class="nav-text">关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">7.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E3%80%81%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">8.</span> <span class="nav-text">常量、基本数据类型、变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">8.1.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.2.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">8.3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.4.</span> <span class="nav-text">数据类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ASCII"><span class="nav-number">9.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.</span> <span class="nav-text">位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.4.</span> <span class="nav-text">条件运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.5.</span> <span class="nav-text">instanceof 运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">11.</span> <span class="nav-text">流程控制语句注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">12.</span> <span class="nav-text">方法重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">13.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">13.1.</span> <span class="nav-text">多维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6"><span class="nav-number">13.2.</span> <span class="nav-text">获取数组长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="nav-number">13.3.</span> <span class="nav-text">遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">13.4.</span> <span class="nav-text">数组作为方法的参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1"><span class="nav-number">14.</span> <span class="nav-text">类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">14.1.</span> <span class="nav-text">类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">14.2.</span> <span class="nav-text">对象的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E8%B0%83%E7%94%A8%E5%90%8C%E4%B8%80%E6%96%B9%E6%B3%95%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE"><span class="nav-number">14.3.</span> <span class="nav-text">两个对象调用同一方法的内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">14.4.</span> <span class="nav-text">对象作为参数与返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E4%B8%8E%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">14.5.</span> <span class="nav-text">局部变量与成员变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">15.</span> <span class="nav-text">封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#private"><span class="nav-number">15.1.</span> <span class="nav-text">private</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this"><span class="nav-number">15.2.</span> <span class="nav-text">this</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">16.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA-Bean-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81"><span class="nav-number">17.</span> <span class="nav-text">JAVA Bean 自动生成代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">18.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scanner"><span class="nav-number">19.</span> <span class="nav-text">Scanner</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1"><span class="nav-number">20.</span> <span class="nav-text">匿名对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random%E7%B1%BB"><span class="nav-number">21.</span> <span class="nav-text">Random类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">22.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">22.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">23.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-1"><span class="nav-number">23.1.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">23.2.</span> <span class="nav-text">字符串的常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E6%96%B9%E6%B3%95"><span class="nav-number">23.3.</span> <span class="nav-text">字符串比较方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96%E4%B8%8E%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95"><span class="nav-number">23.4.</span> <span class="nav-text">字符串获取与分割方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#char%E7%B1%BB%E5%9E%8B"><span class="nav-number">23.5.</span> <span class="nav-text">char类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="nav-number">23.6.</span> <span class="nav-text">字符串转换方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95"><span class="nav-number">23.7.</span> <span class="nav-text">字符串分割方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">24.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">24.1.</span> <span class="nav-text">静态变量与静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%9B%BE"><span class="nav-number">24.2.</span> <span class="nav-text">内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">24.3.</span> <span class="nav-text">静态代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays%E7%B1%BB"><span class="nav-number">25.</span> <span class="nav-text">Arrays类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Math%E7%B1%BB"><span class="nav-number">26.</span> <span class="nav-text">Math类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">27.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E9%87%8D%E5%90%8D"><span class="nav-number">27.1.</span> <span class="nav-text">成员变量重名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E9%87%8D%E5%90%8D%EF%BC%88%E9%87%8D%E5%86%99-Override%EF%BC%89"><span class="nav-number">27.2.</span> <span class="nav-text">成员方法重名（重写 Override）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">27.3.</span> <span class="nav-text">继承中的构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super-%E4%B8%8E-this"><span class="nav-number">27.4.</span> <span class="nav-text">super 与 this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E7%BB%A7%E6%89%BF%E7%9A%84%E4%B8%89%E4%B8%AA%E7%89%B9%E7%82%B9"><span class="nav-number">27.5.</span> <span class="nav-text">java继承的三个特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">28.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">29.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">29.1.</span> <span class="nav-text">接口的定义与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">29.1.1.</span> <span class="nav-text">含有抽象方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95%E5%92%8C%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">29.1.2.</span> <span class="nav-text">含有默认方法和静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95%E5%92%8C%E7%A7%81%E6%9C%89%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">29.1.3.</span> <span class="nav-text">含有私有方法和私有静态方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%AD%E5%B8%B8%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">29.2.</span> <span class="nav-text">接口中常量的定义和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%86%85%E5%AE%B9%E5%B0%8F%E7%BB%93"><span class="nav-number">29.3.</span> <span class="nav-text">接口内容小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%A4%9A%E5%AE%9E%E7%8E%B0"><span class="nav-number">29.4.</span> <span class="nav-text">接口的多实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">29.5.</span> <span class="nav-text">接口的多继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">30.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E4%B8%AD%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">30.1.</span> <span class="nav-text">多态中成员变量与方法的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8A%E5%90%91%E4%B8%8B%E8%BD%AC%E5%9E%8B"><span class="nav-number">30.2.</span> <span class="nav-text">向上向下转型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final"><span class="nav-number">31.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">32.</span> <span class="nav-text">权限修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">33.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">33.1.</span> <span class="nav-text">成员内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">33.2.</span> <span class="nav-text">局部内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">33.3.</span> <span class="nav-text">匿名内部类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="nav-number">34.</span> <span class="nav-text">引用类型方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class%E4%BD%9C%E4%B8%BA%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">34.1.</span> <span class="nav-text">class作为成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interface%E4%BD%9C%E4%B8%BA%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">34.2.</span> <span class="nav-text">interface作为成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interface%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">34.3.</span> <span class="nav-text">interface作为方法参数和返回值类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object%E7%B1%BB"><span class="nav-number">35.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB"><span class="nav-number">36.</span> <span class="nav-text">日期时间类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DateFormat%E7%B1%BB"><span class="nav-number">36.1.</span> <span class="nav-text">DateFormat类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calendar%E7%B1%BB"><span class="nav-number">36.2.</span> <span class="nav-text">Calendar类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System%E7%B1%BB"><span class="nav-number">37.</span> <span class="nav-text">System类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder%E7%B1%BB"><span class="nav-number">38.</span> <span class="nav-text">StringBuilder类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB"><span class="nav-number">39.</span> <span class="nav-text">包装类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">39.1.</span> <span class="nav-text">基本类型与字符串之间的转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">40.</span> <span class="nav-text">Collection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="nav-number">40.1.</span> <span class="nav-text">集合框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection-%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">40.2.</span> <span class="nav-text">Collection 常用功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Collections%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">40.3.</span> <span class="nav-text">Collections常用功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable%E5%92%8CComparator"><span class="nav-number">40.4.</span> <span class="nav-text">Comparable和Comparator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">41.</span> <span class="nav-text">Iterator迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">41.1.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-each%EF%BC%88%E5%A2%9E%E5%BC%BAfor%EF%BC%89"><span class="nav-number">41.2.</span> <span class="nav-text">for each（增强for）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">42.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8%E6%B3%9B%E5%9E%8B"><span class="nav-number">42.1.</span> <span class="nav-text">定义和使用泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E6%B3%9B%E5%9E%8B%E7%9A%84%E7%B1%BB"><span class="nav-number">42.1.1.</span> <span class="nav-text">含有泛型的类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">42.1.2.</span> <span class="nav-text">含有泛型的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AB%E6%9C%89%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">42.1.3.</span> <span class="nav-text">含有泛型的接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">42.2.</span> <span class="nav-text">泛型通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E9%99%90%E6%B3%9B%E5%9E%8B"><span class="nav-number">42.3.</span> <span class="nav-text">受限泛型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="nav-number">43.</span> <span class="nav-text">可变参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">44.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List%E6%8E%A5%E5%8F%A3"><span class="nav-number">45.</span> <span class="nav-text">List接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E6%8E%A5%E5%8F%A3%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">45.1.</span> <span class="nav-text">List接口中常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E7%9A%84%E5%AD%90%E7%B1%BB"><span class="nav-number">45.2.</span> <span class="nav-text">List的子类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList%E9%9B%86%E5%90%88"><span class="nav-number">45.2.1.</span> <span class="nav-text">ArrayList集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList%E9%9B%86%E5%90%88"><span class="nav-number">45.2.2.</span> <span class="nav-text">LinkedList集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vector%E9%9B%86%E5%90%88"><span class="nav-number">45.2.3.</span> <span class="nav-text">vector集合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="nav-number">46.</span> <span class="nav-text">Set接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashset"><span class="nav-number">46.1.</span> <span class="nav-text">Hashset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet%E9%9B%86%E5%90%88%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%88%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%89"><span class="nav-number">46.2.</span> <span class="nav-text">HashSet集合存储数据的结构（哈希表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet%E5%AD%98%E5%82%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E5%85%83%E7%B4%A0"><span class="nav-number">46.3.</span> <span class="nav-text">HashSet存储自定义类型元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">46.4.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet%E4%B8%8EHashSet%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">46.5.</span> <span class="nav-text">TreeSet与HashSet的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map%E9%9B%86%E5%90%88"><span class="nav-number">47.</span> <span class="nav-text">Map集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%B1%BB"><span class="nav-number">47.1.</span> <span class="nav-text">Map常用的子类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">47.2.</span> <span class="nav-text">Map接口中的常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map%E9%9B%86%E5%90%88%E9%81%8D%E5%8E%86"><span class="nav-number">47.3.</span> <span class="nav-text">Map集合遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap%E5%AD%98%E5%82%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">47.4.</span> <span class="nav-text">HashMap存储自定义类型数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">47.5.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">47.6.</span> <span class="nav-text">HashTable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK9%E5%AF%B9%E9%9B%86%E5%90%88%E6%B7%BB%E5%8A%A0%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">48.</span> <span class="nav-text">JDK9对集合添加的优化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王延"
+      src="/images/%E5%A4%B4%E5%83%8F.png">
+  <p class="site-author-name" itemprop="name">王延</p>
+  <div class="site-description" itemprop="description">学习，工作，生活之谈</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luckyWangYan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luckyWangYan"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:649498612@qq.com" title="E-Mail → mailto:649498612@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://github.com/luckyWangYan/luckyWangYan.github.io/2021/04/27/java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.png">
+      <meta itemprop="name" content="王延">
+      <meta itemprop="description" content="学习，工作，生活之谈">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wang Yan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-04-27 12:55:00 / 修改时间：14:26:08" itemprop="dateCreated datePublished" datetime="2021-04-27T12:55:00+08:00">2021-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="存储单元"><a href="#存储单元" class="headerlink" title="存储单元"></a>存储单元</h2><p>位（bit）：一个数字0或者一个数字1代表一位</p>
+<p>字节（Byte）：每逢8位是一个字节，字节是数据存储的最小单位</p>
+<p>1Byte=8bit</p>
+<p>1KB=1024Byte</p>
+<p>1MB=1024KB</p>
+<span id="more"></span> 
+
+<h2 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h2><p>tab键：输入一半，提示</p>
+<p>cd .. :返回上一级</p>
+<p>cd 文件夹1\文件夹2\文件夹3 （配合tab键使用）:进入多级文件夹</p>
+<p>cd \  :返回根路径</p>
+<p>dir :查看当前目录</p>
+<p>cls :清屏</p>
+<p>exit:退出</p>
+<h2 id="java虚拟机：JVM"><a href="#java虚拟机：JVM" class="headerlink" title="java虚拟机：JVM"></a>java虚拟机：JVM</h2><p>JVM是java程序的运行环境</p>
+<p>跨平台：JVM本身不具有跨平台功能，每个操作系统都有不同版本的JVM，java程序运行在JVM上，JVM运行在操作系统上，起到翻译的作用，进而java程序可以运行在不同的操作系统上，称为java语言的跨平台特性。</p>
+<h2 id="JRE和JDK"><a href="#JRE和JDK" class="headerlink" title="JRE和JDK"></a>JRE和JDK</h2><p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210331203552556.png" alt="image-20210331203552556"></p>
+<p>三者关系</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210331203759419.png" alt="image-20210331203759419"></p>
+<h2 id="JVM内存划分"><a href="#JVM内存划分" class="headerlink" title="JVM内存划分"></a>JVM内存划分</h2><p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210401202810310.png" alt="image-20210401202810310"></p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><p>关键字：是指在程序中，Java已经定义好的单词，具有特殊含义。<br>全部都是小写字母，notepad++中颜色特殊。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407171115204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3oxd2Vi,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul>
+<li>标识符可以包含英文字母26个(区分大小写) 、0-9数字 、$（美元符号） 和_（下划线） 。</li>
+<li>标识符不能以数字开头</li>
+<li>大小写敏感，长度无限制</li>
+<li>类名规范：首字母大写，后面每个单词首字母大写（大驼峰式）。<br>方法名规范： 首字母小写，后面每个单词首字母大写（小驼峰式）。<br>变量名规范：全部小写。</li>
+</ul>
+<h2 id="常量、基本数据类型、变量"><a href="#常量、基本数据类型、变量" class="headerlink" title="常量、基本数据类型、变量"></a>常量、基本数据类型、变量</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><blockquote>
+<p>常量：Java程序中固定不变的数据。</p>
+<p>例如：整数常量、浮点数常量、字符常量、字符串常量、布尔常量、空常量（空常量不能打印）</p>
+</blockquote>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
+<li><p>基本数据类型：包括 整数、浮点数、字符、布尔。（四类八种）</p>
+</li>
+<li><p>引用数据类型：包括 <strong>字符串</strong>、类、数组、接口。</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210401102037784.png" alt="image-20210401102037784"></p>
+</li>
+</ul>
+<p>（<strong>数据范围跟内存占用不一定相关</strong>，float采用科学计数法，内存占用比long小，但表示范围比long长）</p>
+<blockquote>
+<p>Java中的默认类型：</p>
+<p>整数类型是int ,如果使用long型，需加上后缀L</p>
+<p>浮点类型是double ，如果使用float型，需加上后缀F</p>
+</blockquote>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>声明并赋值：<code>数据类型 变量名 = 数据值;</code></p>
+<p>long类型：建议数据后加L表示。float类型：建议数据后加F表示。</p>
+<p>定义的变量，不赋值不能使用。</p>
+<p>赋值时，右侧的数值大小不能超过左侧的类型范围。</p>
+<p>作用域：从定义变量的一行开始，一直到直接所属的大括号结束为止。</p>
+<ul>
+<li><p>将最大值或最小值赋值给变量</p>
+<pre class="line-numbers language-none"><code class="language-none">int max &#x3D; Integer.MAX_VALUE;
+int min &#x3D; Integer.MIN_VALUE;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h3><ul>
+<li><p>自动转换：将取值范围小的类型自动提升为取值范围大的类型 。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">byte</span>、<span class="token keyword">short</span>、<span class="token keyword">char</span>‐‐<span class="token operator">></span><span class="token keyword">int</span>‐‐<span class="token operator">></span><span class="token keyword">long</span>‐‐<span class="token operator">></span><span class="token keyword">float</span>‐‐<span class="token operator">></span><span class="token keyword">double</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>强制类型转换：将取值范围大的类型强制转换成取值范围小的类型。</p>
+<p>转换格式：<code>数据类型 变量名 = （数据类型）被转数据值；</code></p>
+</li>
+<li><p>注意：</p>
+<ol>
+<li>浮点转成整数，直接取消小数点，可能造成数据损失精度。</li>
+<li>int 强制转成short 砍掉2个字节，可能造成数据丢失。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 定义s为short范围内最大值</span>
+<span class="token keyword">short</span> s <span class="token operator">=</span> <span class="token number">32767</span><span class="token punctuation">;</span>
+<span class="token comment">// 运算后，强制转换，砍掉2个字节后会出现不确定的结果</span>
+s <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">short</span><span class="token punctuation">)</span><span class="token punctuation">(</span>s <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li><p>byte/short/char这三种类型都可以发生<strong>数学运算</strong>，（char依据ASCII编码表进行转换），在运算时，<strong>会被首先提升为int类型</strong>，再计算。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">byte</span> num1 <span class="token operator">=</span> <span class="token number">10</span> <span class="token comment">// 编译器默认加上了强转 byte num1 = (byte) 10</span>
+<span class="token keyword">byte</span> num2 <span class="token operator">=</span> <span class="token number">20</span>
+<span class="token keyword">byte</span> result1 <span class="token operator">=</span> num1 <span class="token operator">+</span> num2 <span class="token comment">//错误，先转换为int再加，所以相加结果为int类型</span>
+<span class="token keyword">int</span> result2 <span class="token operator">=</span> num1 <span class="token operator">+</span> num2 <span class="token comment">//正确</span>
+<span class="token keyword">byte</span> result3 <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token number">20</span> <span class="token comment">//正确</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>boolean类型不能发生数据类型转换</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><p>ASCII：0-127</p>
+<p>Unicode码表：万国码，也是字符与符号的对照表，开头0-127与ASCII完全一样，但是从128开始包含有更多字符。</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210401144728237.png" alt="image-20210401144728237"></p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h3><p>% ：取余</p>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><p>下表列出了位运算符的基本运算，</p>
+<p>变量 A 的值为 60 （0011 1100）</p>
+<p>变量 B 的值为 13（0000 1101）：</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">＆</td>
+<td align="left">如果相对应位都是1，则结果为1，否则为0</td>
+<td align="left">（A＆B），得到12，即0000 1100</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">如果相对应位都是 0，则结果为 0，否则为 1</td>
+<td align="left">（A | B）得到61，即 0011 1101</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">如果相对应位值相同，则结果为0，否则为1</td>
+<td align="left">（A ^ B）得到49，即 0011 0001</td>
+</tr>
+<tr>
+<td align="left">〜</td>
+<td align="left">按位取反运算符翻转操作数的每一位，即0变成1，1变成0。</td>
+<td align="left">（〜A）得到-61，即1100 0011</td>
+</tr>
+<tr>
+<td align="left">&lt;&lt;</td>
+<td align="left">按位左移运算符。左操作数按位左移右操作数指定的位数。</td>
+<td align="left">A &lt;&lt; 2得到240，即 1111 0000</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;</td>
+<td align="left">按位右移运算符。左操作数按位右移右操作数指定的位数。</td>
+<td align="left">A &gt;&gt; 2得到15即 1111</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;&gt;</td>
+<td align="left">按位右移补零操作符。左操作数的值按右操作数指定的位数右移，移动得到的空位以零填充。</td>
+<td align="left">A&gt;&gt;&gt;2得到15即0000 1111</td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>下表列出了逻辑运算符的基本运算，假设布尔变量A为真，变量B为假</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;&amp;</td>
+<td align="left">称为逻辑与运算符。当且仅当两个操作数都为真，条件才为真。</td>
+<td align="left">（A &amp;&amp; B）为假。</td>
+</tr>
+<tr>
+<td align="left">| |</td>
+<td align="left">称为逻辑或操作符。如果任何两个操作数任何一个为真，条件为真。</td>
+<td align="left">（A | | B）为真。</td>
+</tr>
+<tr>
+<td align="left">！</td>
+<td align="left">称为逻辑非运算符。用来反转操作数的逻辑状态。如果条件为true，则逻辑非运算符将得到false。</td>
+<td align="left">！（A &amp;&amp; B）为真。</td>
+</tr>
+</tbody></table>
+<h3 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h3><p>条件运算符也被称为三元运算符。该运算符有3个操作数，并且需要判断布尔表达式的值。该运算符的主要是决定哪个值应该赋值给变量。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 如果 a 等于 10 成立，则设置 b 为 20，否则为 30</span>
+b <span class="token operator">=</span> <span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">20</span> <span class="token operator">:</span> <span class="token number">30</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="instanceof-运算符"><a href="#instanceof-运算符" class="headerlink" title="instanceof 运算符"></a>instanceof 运算符</h3><p>该运算符用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）。</p>
+<p>instanceof运算符使用格式如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> name <span class="token operator">=</span> <span class="token string">"James"</span><span class="token punctuation">;</span>
+<span class="token keyword">boolean</span> result <span class="token operator">=</span> name <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">;</span> <span class="token comment">// 由于 name 是 String 类型，所以返回真</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="流程控制语句注意事项"><a href="#流程控制语句注意事项" class="headerlink" title="流程控制语句注意事项"></a>流程控制语句注意事项</h2><ul>
+<li><p>控制条件语句所控制的那个变量，在for循环结束后，就不能再被访问到了，而while循环结束还可以继<br>续使用，如果你想继续使用，就用while，否则推荐使用for。原因是for循环结束，该变量就从内存中消<br>失，能够提高内存的使用效率。</p>
+</li>
+<li><p>在已知循环次数的时候使用推荐使用for，循环次数未知的时推荐使用while。</p>
+</li>
+<li><p>break：终止switch或循环</p>
+</li>
+<li><p>continue：结束本次循环，继续下一次循环</p>
+</li>
+</ul>
+<h2 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h2><p>方法重载：指在同一个类中，允许存在一个以上的同名方法，只要它们的<strong>参数列表不同即可，与修饰符和返回值类型无关</strong>。<br>参数列表：个数不同，数据类型不同，顺序不同。<br>重载方法调用：JVM通过方法的参数列表，调用不同的方法。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一种引用数据类型，数组中的多个数据，类型必须统一，数组的长度在程序运行期间不可改变</p>
+<blockquote>
+<p>数组初始化</p>
+<p>1.动态初始化（指定长度）</p>
+<p>2.静态初始化（指定内容）(自动推算数组长度)</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">动态初始化：数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名称 <span class="token operator">=</span> <span class="token keyword">new</span> 数据类型<span class="token punctuation">[</span>数组长度<span class="token punctuation">]</span>
+静态初始化：数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名称 <span class="token operator">=</span> <span class="token keyword">new</span> 数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span>元素<span class="token number">1</span><span class="token punctuation">,</span>元素<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">&#125;</span>
+  省略格式：数据类型<span class="token punctuation">[</span><span class="token punctuation">]</span> 数组名称 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>元素<span class="token number">1</span><span class="token punctuation">,</span>元素<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">&#125;</span> <span class="token comment">//元素可以为变量</span>
+注意：省略格式不能拆分为两步 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">;</span>
+						array<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">&#125;</span>  <span class="token comment">//错误写法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数组的内存图：</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210401205305698.png" alt="image-20210401205305698"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// 定义数组，存储3个元素</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">//数组索引进行赋值</span>
+arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+arr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token comment">//输出3个索引上的元素值</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//定义数组变量arr2，将arr的地址赋值给arr2</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr2 <span class="token operator">=</span> arr<span class="token punctuation">;</span>   <span class="token comment">//两个变量指向同一个数组，引用</span>
+arr2<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>所有的引用类型变量，都可以赋值为一个null值，但是代表其中什么也没有</p>
+</li>
+<li><p>如果只是赋值了一个null，没有进行new的创建，那么将会发生空指针异常</p>
+</li>
+</ul>
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><p>初始化：<code>type [] [] typeName = new type[typeLength1][typeLength2]</code></p>
+<h3 id="获取数组长度"><a href="#获取数组长度" class="headerlink" title="获取数组长度"></a>获取数组长度</h3><p>方法：<code>数组名称.length</code></p>
+<p><strong>数组一旦创建，程序运行期间，长度不可改变</strong></p>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p>快捷键：数组名称.fori</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>for-each循环</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span>数据类型 元素变量名称<span class="token punctuation">(</span>element<span class="token punctuation">)</span> <span class="token operator">:</span> 数组名称
+             <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="数组作为方法的参数"><a href="#数组作为方法的参数" class="headerlink" title="数组作为方法的参数"></a>数组作为方法的参数</h3><p>数组作为方法参数传递，传递的参数是数组内存的地址。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一个方法不能有多个返回值，需要返回多个数据时，用数组类型进行返回</p>
+<p>数组作为方法的返回值，返回的是数组的内存地址</p>
+<p>**方法的参数为基本类型时,传递的是数据值，在函数里面无法修改 **</p>
+<p><strong>方法的参数为引用类型时,传递的是地址值，在函数中可以直接修改</strong></p>
+<h2 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h2><h3 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ClassName</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">//成员变量</span>
+	<span class="token comment">//成员方法</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>定义类：就是定义类的成员，包括成员变量和成员方法。</li>
+<li>成员变量：和以前定义变量几乎是一样的。只不过位置发生了改变。在类中，方法外。</li>
+<li>成员方法：和以前定义方法几乎是一样的。只不过把static去掉</li>
+</ul>
+<h3 id="对象的使用"><a href="#对象的使用" class="headerlink" title="对象的使用"></a>对象的使用</h3><blockquote>
+<p>创建对象</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">类名 对象名 <span class="token operator">=</span> <span class="token keyword">new</span> 类名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>使用对象访问类中的成员</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">对象名<span class="token punctuation">.</span>成员变量；
+对象名<span class="token punctuation">.</span>成员方法<span class="token punctuation">(</span><span class="token punctuation">)</span>；<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="两个对象调用同一方法的内存图"><a href="#两个对象调用同一方法的内存图" class="headerlink" title="两个对象调用同一方法的内存图"></a>两个对象调用同一方法的内存图</h3><p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210406111106360.png" alt="image-20210406111106360"></p>
+<h3 id="对象作为参数与返回值"><a href="#对象作为参数与返回值" class="headerlink" title="对象作为参数与返回值"></a>对象作为参数与返回值</h3><p>对象作为参数，是引用类型，传递的是地址值</p>
+<p>对象作为方法的返回值，返回值就是对象的地址值</p>
+<h3 id="局部变量与成员变量"><a href="#局部变量与成员变量" class="headerlink" title="局部变量与成员变量"></a>局部变量与成员变量</h3><ul>
+<li>在类中的位置不同 重点<br>成员变量：类中，方法外<br>局部变量：方法中或者方法声明上(形式参数)</li>
+<li>作用范围不一样 重点<br>成员变量：类中<br>局部变量：方法中</li>
+<li>初始化值的不同 重点<br>成员变量：有默认值<br>局部变量：没有默认值。必须先定义，赋值，最后使用</li>
+<li>在内存中的位置不同 了解<br>成员变量：堆内存<br>局部变量：栈内存</li>
+<li>生命周期不同 了解<br>成员变量：随着对象的创建而存在，随着对象的消失而消失<br>局部变量：随着方法的调用而存在，随着方法的调用完毕而消失</li>
+</ul>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>原则：将属性隐藏起来，若需要访问某个属性，提供公共方法对其访问。</p>
+<ul>
+<li>方法就是一种封装</li>
+<li>关键字private也是一种封装</li>
+</ul>
+<h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><ol>
+<li><p>private是一个权限修饰符，代表最小权限。</p>
+</li>
+<li><p>可以修饰成员变量和成员方法，不能修饰类。</p>
+</li>
+<li><p>被private修饰后的成员变量和成员方法，只在本类中才能访问。</p>
+</li>
+</ol>
+<blockquote>
+<p>使用 private 关键字来修饰成员变量。</p>
+<p>对需要访问的成员变量，提供对应的一对 getXxx 方法 、setXxx 方法。(对基本类型当中的boolean值，Get方法一定写成isXxx的形式，而setXxx规则不变)</p>
+</blockquote>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><ul>
+<li>当方法的局部变量和类的成员变量重名的时候，根据就近原则，优先使用局部变量</li>
+<li>如果需要访问本类当中的成员变量，需要使用<code> this.成员变量名</code></li>
+</ul>
+<blockquote>
+<p>this代表所在类的当前对象的引用（地址值），即对象自己的引用。</p>
+</blockquote>
+<p>​    <strong>方法被哪个对象调用，方法中的this就代表那个对象。即谁在调用，this就代表谁。</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">//name = name;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>当一个对象被创建时候，构造方法用来初始化该对象，给对象的成员变量赋初始值。</p>
+<blockquote>
+<p>小贴士：无论你与否自定义构造方法，所有的类都有构造方法，因为Java自动提供了一个无参数构造方法，一旦自己定义了构造方法，Java自动提供的默认无参数构造方法就会失效。<br>构造方法的定义格式</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">修饰符 构造方法名<span class="token punctuation">(</span>参数列表<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<span class="token comment">// 方法体</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>构造方法的写法上，方法名与它所在的类名相同。它没有返回值，所以不需要返回值类型，甚至不需要void。使用构造方法后，代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+	<span class="token comment">// 无参数构造方法</span>
+	<span class="token keyword">public</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token comment">// 有参数构造方法</span>
+	<span class="token keyword">public</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">,</span><span class="token keyword">int</span> age<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意事项</p>
+<ol>
+<li>如果你不提供构造方法，系统会给出无参数构造方法。</li>
+<li>如果你提供了构造方法，系统将不再提供无参数构造方法。</li>
+<li>构造方法是可以<strong>重载</strong>的，既可以定义参数，也可以不定义参数。</li>
+</ol>
+<h2 id="JAVA-Bean-自动生成代码"><a href="#JAVA-Bean-自动生成代码" class="headerlink" title="JAVA Bean 自动生成代码"></a>JAVA Bean 自动生成代码</h2><p>JavaBean 是 Java语言编写类的一种标准规范。符合JavaBean 的类，要求类必须是具体的和公共的，并且具有无参数的构造方法，提供用来操作成员变量的set 和get 方法。</p>
+<p>code ——generator——选择所有成员变量——生成getter/setter方法</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>​    Java API是一本程序员的字典 ，是JDK中提供给我们使用的类的说明文档。这些类将底层的代码实现封装了起来，我们不需要关心这些类是如何实现的，只需要学习这些类如何使用即可。所以我们可以通过查询API的方式，来学习Java提供的类，并得知如何使用它们。</p>
+<h2 id="Scanner"><a href="#Scanner" class="headerlink" title="Scanner"></a>Scanner</h2><p>1、导包： 如果需要使用的目标类，和当前类位于同一个包下，则可以省略导包语句不写</p>
+<p>2、只有java.lang包下的内容不需要导包，其它的包都需要import语句。</p>
+<blockquote>
+<p>导包</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> 包名<span class="token punctuation">.</span>类名<span class="token punctuation">;</span>
+<span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span>Scanner</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>创建对象</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">数据类型 变量名 <span class="token operator">=</span> <span class="token keyword">new</span> 数据类型<span class="token punctuation">(</span>参数列表<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>调用方法</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">变量名.方法名();
+int i &#x3D; sc.nextInt(); &#x2F;&#x2F; 接收一个键盘录入的整数
+String str &#x3D; sc.next(); &#x2F;&#x2F;接受一个键盘录入的字符串<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h2><p>匿名对象是没有变量名的对象。一个匿名对象只能使用一次。</p>
+<p>创建对象时，只有创建对象的语句，却没有把对象地址值赋值给某个变量。虽然是创建对象的简化写法，但是应用场景非常有限。</p>
+<blockquote>
+<p>应用场景</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//创建匿名对象直接调用方法，没有变量名</span>
+<span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//匿名对象可以作为方法的参数和返回值</span>
+<span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 普通方式</span>
+        <span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">input</span><span class="token punctuation">(</span>sc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//匿名对象作为方法接收的参数</span>
+        <span class="token function">input</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">input</span><span class="token punctuation">(</span><span class="token class-name">Scanner</span> sc<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>sc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Test2</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 普通方式</span>
+        <span class="token class-name">Scanner</span> sc <span class="token operator">=</span> <span class="token function">getScanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Scanner</span> <span class="token function">getScanner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//普通方式</span>
+        <span class="token comment">//Scanner sc = new Scanner(System.in);</span>
+        <span class="token comment">//return sc;</span>
+        <span class="token comment">//匿名对象作为方法返回值</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Random类"><a href="#Random类" class="headerlink" title="Random类"></a>Random类</h2><p><code>public int nextInt() </code>:返回一个伪随机数，范围是int所有范围，有正负两种。</p>
+<p><code>public int nextInt(int n) </code>：返回一个伪随机数，范围在 0 （包括）和指定值 n （不包括）之间的<br>int 值。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//1. 导包</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Random</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo01_Random</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//2. 创建键盘录入数据的对象</span>
+        <span class="token class-name">Random</span> r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token comment">//3. 随机生成一个数据</span>
+            <span class="token keyword">int</span> number <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//4. 输出数据</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"number:"</span><span class="token operator">+</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><blockquote>
+<p>ArrayList类</p>
+</blockquote>
+<p><code>java.util.ArrayList &lt;E&gt;</code>   <E> ，表示一种指定的数据类型，叫做泛型。E ，取自Element（元素）的首字母。在出现E 的地方，我们使用一种引用数据类型将其替换即可。</E></p>
+<blockquote>
+<p>初始化一个ArrayList</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>注意事项：</li>
+</ul>
+<ol>
+<li><p>对arrayList集合来说，直接打印得到的不是地址值，而是内容，若为空则为[]</p>
+</li>
+<li><p>泛型只能是引用类型，不能是基本类型，但是存储基本数据类型对应的包装类型是可以的。所以，想要存储基本类型数据， &lt;&gt; 中的数据类型，必须转换后才能编写，转换写法如下(int–&gt;Integer，</p>
+<p>char–&gt;Character)</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210406205158848.png" alt="image-20210406205158848"></p>
+</li>
+</ol>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><code>public boolean add(E e) </code>：将指定的元素添加到此集合的尾部。<br><code>public E remove(int index) </code>：移除此集合中指定位置上的元素。返回被删除的元素。<br><code>public E get(int index) </code>：返回此集合中指定位置上的元素。返回获取的元素。<br><code>public int size()</code> ：返回此集合中的元素数。遍历集合时，可以控制索引范围，防止越界。</p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ol>
+<li><p>字符串不变：字符串的值在创建后不能被更改，重新赋值后，只是地址发生了改变，字符串的内容没有发生变化。</p>
+</li>
+<li><p>因为String对象是不可变的，所以它们可以被共享。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+<span class="token comment">// 内存中只有一个"abc"对象被创建，同时被s1和s2共享。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>String效果上相当于是char[]字符数组，但是底层原理是byte[]字节数组。</p>
+</li>
+</ol>
+<h3 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
+<li><code>public String() </code>：初始化新创建的 String对象，以使其表示空字符序列。</li>
+<li><code>public String(char[] value) </code>：通过当前参数中的字符数组来构造新的String。</li>
+<li><code>public String(byte[] bytes)</code> ：通过使用平台的默认字符集解码当前参数中的字节数组来构造新的String。</li>
+<li>直接创建：<code>String str  = “Hello”</code> //直接写上双引号，就是字符串对象</li>
+</ul>
+<h3 id="字符串的常量池"><a href="#字符串的常量池" class="headerlink" title="字符串的常量池"></a>字符串的常量池</h3><pre class="line-numbers language-none"><code class="language-none">String str1 &#x3D; &quot;abc&quot;;
+String str2 &#x3D; &quot;abc&quot;;
+char[] charArray &#x3D; &#123;&#39;a&#39;,&#39;b&#39;,&#39;c&#39;&#125;;
+String str3 &#x3D; new String (charArray);
+
+str1 &#x3D;&#x3D; str2; (true)
+str1 &#x3D;&#x3D; str3; (false)
+str2 &#x3D;&#x3D; str3; (false)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>对于基本类型来说，== 是进行数值的比较</li>
+<li>对于引用类型来说，== 是进行<strong>地址值</strong>的比较</li>
+</ul>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210408142705286.png" alt="image-20210408142705286"></p>
+<h3 id="字符串比较方法"><a href="#字符串比较方法" class="headerlink" title="字符串比较方法"></a>字符串比较方法</h3><p><code>public boolean equals (Object anObject) </code>：将此字符串与指定对象进行比较。<br><code>public boolean equalsIgnoreCase (String anotherString) </code>：将此字符串与指定对象进行比较，忽略大小写。</p>
+<ul>
+<li>== 是进行对象的地址值的比较，如果确实要进行字符串内容的比较，需要采用字符串比较的方式</li>
+<li>Object 是” 对象”的意思，也是一种引用类型。作为参数类型，表示任意对象都可以传递到方法中。</li>
+<li>equals方法具有对称性，a.equals(b)和b.equals(a)效果一样。（推荐把常量字符串写在前面，如果变量为空，会出现空指针异常）</li>
+</ul>
+<h3 id="字符串获取与分割方法"><a href="#字符串获取与分割方法" class="headerlink" title="字符串获取与分割方法"></a>字符串获取与分割方法</h3><p><code>public int length () </code>：返回此字符串的长度。<br><code>public String concat (String str)</code> ：将指定的字符串连接到该字符串的末尾。(生成新的字符串)<br><code>public char charAt (int index) </code>：返回指定索引处的 char值。<br><code>public int indexOf (String str) </code>：返回指定子字符串第一次出现在该字符串内的索引。<br><code>public String substring (int beginIndex) </code>：返回一个子字符串，从beginIndex开始截取字符串到字符串结尾。<br><code>public String substring (int beginIndex, int endIndex) </code>：返回一个子字符串，从beginIndex到<br>endIndex截取字符串。含beginIndex，不含endIndex。</p>
+<h3 id="char类型"><a href="#char类型" class="headerlink" title="char类型"></a>char类型</h3><p>在运算时会被转为int型，int=char +char</p>
+<p>如何将char类型的数字字符变为int型数字</p>
+<p>用该char型变量减<code>&#39;0&#39;</code></p>
+<h3 id="字符串转换方法"><a href="#字符串转换方法" class="headerlink" title="字符串转换方法"></a>字符串转换方法</h3><p><code>public char[] toCharArray ()</code> ：将此字符串转换为新的字符数组，作为返回值。<br><code>public byte[] getBytes () </code>：使用平台的默认字符集将该 String编码转换为新的字节数组。<br><code>public String replace (CharSequence target, CharSequence replacement) </code>：将与target匹配的字符串使用replacement字符串替换。</p>
+<h3 id="字符串分割方法"><a href="#字符串分割方法" class="headerlink" title="字符串分割方法"></a>字符串分割方法</h3><p><code>public String[] split(String regex) </code>：将此字符串按照给定的regex（规则）拆分为字符串数组。</p>
+<ul>
+<li>注意事项：split方法的参数其实是一个正则表达式，如果按照英文句点“.”进行切分，必须写”//.”</li>
+</ul>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>当 <code>static </code>修饰成员变量时，该变量称为类变量。该类的每个对象都共享同一个类变量的值。任何对象都可以更改该类变量的值，但也可以在不创建该类的对象的情况下对类变量进行操作。</p>
+<p>如果没有static关键字，那么必须首先创建对象，然后通过对象才能调用它</p>
+<p>如果有了static关键字，那么不需要创建对象，直接就能通过类名称来使用它</p>
+<h3 id="静态变量与静态方法"><a href="#静态变量与静态方法" class="headerlink" title="静态变量与静态方法"></a>静态变量与静态方法</h3><ol>
+<li>当<code>static</code>修饰成员变量时，该变量称为类变量。该类的每个对象都<strong>共享同一个类变量的值</strong>。任何对象都可以更改该类变量的值，但也可以在不创建该类的对象的情况下对类变量进行操作。</li>
+<li>静态方法可以通过对象名称调用，但是不推荐，推荐直接通过类名称来调用。</li>
+<li><strong>静态方法中只能访问类中的静态变量（类变量），不能访问非静态变量（成员变量）和成员方法</strong>，成员方法既可以访问成员变量也可以访问静态变量。</li>
+<li>静态方法中不能使用this（this代表当前对象，通过谁调用的方法，谁就是当前对象）</li>
+</ol>
+<h3 id="内存图"><a href="#内存图" class="headerlink" title="内存图"></a>内存图</h3><p>static修饰的内容是随着类的加载而加载的，且只加载一次。它存储于一块固定的内存区域（静态区），所以，可以直接被类名调用。优先于对象存在，所以，可以被所有对象共享</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210408164930404.png" alt="image-20210408164930404"></p>
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><p>用途：用来一次性地对静态成员变量进行赋值。</p>
+<p>格式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ClassName</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>特点：当第一次用到本类时，静态代码块执行<strong>唯一</strong>的一次</li>
+<li>静态内容总是优先于非静态，所以静态代码块比构造方法先执行。</li>
+</ul>
+<h2 id="Arrays类"><a href="#Arrays类" class="headerlink" title="Arrays类"></a>Arrays类</h2><p><code>java.util.Arrays </code>此类包含用来操作数组的各种方法，比如排序和搜索等。其所有方法均为静态方法，调用起来非常简单。</p>
+<p><code>public static String toString(数组) </code>：返回传入参数数组内容的字符串表示形式。</p>
+<p><code>public static void sort(数组)</code> ：按照默认升序对数组进行排序。</p>
+<p>用法：<code>Arrays.sort(arr)</code></p>
+<h2 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h2><p><code>java.lang.Math </code>类包含用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数。类似这样的工具类，其所有方法均为静态方法，并且不会创建对象，调用起来非常简单。</p>
+<p><code>public static double abs(double a) </code>：返回 double 值的绝对值。</p>
+<p><code>public static double ceil(double a) </code>：返回大于等于参数的最小的整数。(向上取整)</p>
+<p><code>public static double floor(double a)</code> ：返回小于等于参数最大的整数。（向下取整）</p>
+<p><code>public static long round(double a) </code>：返回最接近参数的 long。(相当于四舍五入方法)</p>
+<p><code>Math.PI</code> 代表近似的圆周率常量（double）</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li><p>继承：就是子类继承父类的属性和行为，使得子类对象具有与父类相同的属性、相同的行为。子类可以直接访问父类中的非私有的属性和行为。</p>
+</li>
+<li><p>继承是多态的前提，提高了代码的复用性</p>
+<p>通过<code>extends</code>关键字，可以声明一个子类继承另外一个父类，定义格式如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">继承演示，代码如下：
+<span class="token keyword">class</span> 父类 <span class="token punctuation">&#123;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> 子类 <span class="token keyword">extends</span> 父类 <span class="token punctuation">&#123;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="成员变量重名"><a href="#成员变量重名" class="headerlink" title="成员变量重名"></a>成员变量重名</h3><p>  局部变量： 直接写成成员变量名</p>
+<p>  本类的成员变量：<code>this.成员变量名</code></p>
+<p>  父类的成员变量：<code>super.成员变量名</code></p>
+<p>  无论是成员变量还是成员方法重名，创建的对象是谁就优先用谁，如果没有就向上找父类。</p>
+<h3 id="成员方法重名（重写-Override）"><a href="#成员方法重名（重写-Override）" class="headerlink" title="成员方法重名（重写 Override）"></a>成员方法重名（重写 Override）</h3><p>**方法重写 **：子类中出现与父类一模一样的方法时（返回值类型，方法名和参数列表都相同），会出现覆盖效果，也称为重写或者复写。声明不变，重新实现。</p>
+<p><code>@Override</code>写在方法前面，用来检测是不是有效的正确覆盖重写</p>
+<ul>
+<li><p>子类方法的返回值必须<strong>小于等于</strong>父类方法返回值的范围（覆盖重写时，子类方法的返回值为String，父类方法的返回值需要大于等于String范围，比如：Object）</p>
+</li>
+<li><p>子类方法覆盖父类方法，必须要保证权限大于等于父类权限。（public&gt;protected&gt;(default)&gt;private）</p>
+</li>
+</ul>
+<ol start="2">
+<li>子类方法覆盖父类方法，返回值类型、函数名和参数列表都要一模一样。</li>
+</ol>
+<h3 id="继承中的构造方法"><a href="#继承中的构造方法" class="headerlink" title="继承中的构造方法"></a>继承中的构造方法</h3><ul>
+<li>子类的初始化过程中，必须<strong>先执行父类的初始化动作</strong>。子类的构造方法中默认有一个super() ，表示调用父类的构造方法，父类成员变量初始化后，才可以给子类使用。</li>
+<li>子类构造方法可以通过super关键字来调用父类重载构造。</li>
+<li>super的父类构造调用，必须是子类构造方法的第一个语句，不写的话会默认有一个super（），写了的话则用指定的super调用，只能有一个super调用，还必须是第一个。</li>
+</ul>
+<h3 id="super-与-this"><a href="#super-与-this" class="headerlink" title="super 与 this"></a>super 与 this</h3><ul>
+<li><p>super关键字的三种用法：</p>
+<p>在子类的成员方法中访问父类的成员变量</p>
+<p>在子类的成员方法中访问父类的成员方法</p>
+<p>在子类的构造方法中访问父类的构造方法</p>
+</li>
+<li><p>this关键字的三种用法：</p>
+<p>在本类的成员方法中访问本类的成员变量</p>
+<p>在本类的成员方法中访问本类的另一个成员方法</p>
+<p>在本类的构造方法中访问本类的另一个构造方法（this（…）调用必须是构造方法的第一个语句，且是唯一一个）</p>
+<p>super和this构造调用不能同时使用</p>
+</li>
+</ul>
+<p>图解：</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210409131513584.png" alt="image-20210409131513584"></p>
+<h3 id="java继承的三个特点"><a href="#java继承的三个特点" class="headerlink" title="java继承的三个特点"></a>java继承的三个特点</h3><ul>
+<li>java语言是单继承的，一个类的直接父亲只能有唯一一个</li>
+<li>java语言可以多级继承(C继承B，B继承A)</li>
+<li>一个子类的直接父类是唯一的，但是一个父类可以有多个子类</li>
+</ul>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>​    父类中的方法，被它的子类们重写，子类各自的实现都不尽相同。那么父类的方法声明和方法主体，只有声明还有意义，而方法主体则没有存在的意义了。我们把没有方法主体的方法称为<strong>抽象方法</strong>。Java语法规定，包含抽象方法的类就是<strong>抽象类</strong>。</p>
+<ul>
+<li><p>抽象方法：使用<code>abstract </code>关键字修饰方法，该方法就成了抽象方法，抽象方法只包含一个方法名，而没有方法体（没有大括号）。</p>
+</li>
+<li><p>抽象类：如果一个类包含抽象方法，那么该类必须是抽象类。</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Animal</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>；
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>注意事项：</p>
+<ol>
+<li>不能直接创建抽象类对象。</li>
+<li>子类必须覆盖重写抽象父类当中<strong>所有</strong>的抽象方法（子类去掉抽象方法的abstract关键字，然后补上方法体大括号），否则编译无法通过，除非该子类也是抽象类。</li>
+<li>抽象类中<strong>可以有构造方法</strong>，供子类创建对象时，初始化父类成员使用的。</li>
+<li>抽象类中不一定包含抽象方法，但是有抽象方法的类必定是抽象类</li>
+</ol>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
+<li><p>接口，是Java语言中一种引用类型，是方法的集合，如果说类的内部封装了成员变量、构造方法和成员方法，那么接口的内部主要就是<code>封装了方法，包含抽象方法（JDK 7及以前），默认方法和静态方法（JDK 8），私有方法（JDK 9）</code>。</p>
+<ul>
+<li>接口的定义，它与定义类方式相似，但是使用 <code>interface </code>关键字。它也会被编译成.class文件，但一定要明确它并不是类，而是另外一种引用数据类型。</li>
+<li>接口是没有静态代码块或者构造方法的    </li>
+</ul>
+</li>
+<li><p>接口的使用，它不能创建对象，但是可以被实现（ <code>implements </code>，类似于被继承）。一个实现接口的类（可以看做是接口的子类），需要实现接口中<strong>所有的<em>抽象方法</em></strong>，创建该类对象，就可以调用方法了，否则它必须是一个抽象类。</p>
+</li>
+</ul>
+<h3 id="接口的定义与实现"><a href="#接口的定义与实现" class="headerlink" title="接口的定义与实现"></a>接口的定义与实现</h3><h4 id="含有抽象方法"><a href="#含有抽象方法" class="headerlink" title="含有抽象方法"></a>含有抽象方法</h4><p>​    接口当中的抽象方法，修饰符必须是两个固定的关键字： <code>public abstract</code>这两个关键字可以<code>选择性省略</code>或者都省略。（没有方法体）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">InterFaceName</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="含有默认方法和静态方法"><a href="#含有默认方法和静态方法" class="headerlink" title="含有默认方法和静态方法"></a>含有默认方法和静态方法</h4><p>默认方法：使用 <code>default </code>修饰，不可省略，供<strong>子类调用或者子类重写</strong>。与抽象方法不同，<strong>不需要必须</strong>在子类中覆盖重写，可以直接调用。<br>静态方法：使用<code>static</code>修饰，供接口直接调用。<strong>只能使用接口名调用，不可以通过实现类的类名或者实现类的对象调用</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//都有方法体</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">InterFaceName</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   		<span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">method2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	<span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="含有私有方法和私有静态方法"><a href="#含有私有方法和私有静态方法" class="headerlink" title="含有私有方法和私有静态方法"></a>含有私有方法和私有静态方法</h4><p>如果一个接口中有多个默认方法，并且方法中有重复的内容，那么可以抽取出来，封装到私有方法中，供默认方法调用</p>
+<p>私有方法：只有接口中的<code>默认方法</code>可以调用。<br>私有静态方法：只有接口中的<code>默认方法和静态方法</code>可以调用。</p>
+<p>私有方法：使用 <code>private </code>修饰，</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">InterFaceName</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	<span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="接口中常量的定义和使用"><a href="#接口中常量的定义和使用" class="headerlink" title="接口中常量的定义和使用"></a>接口中常量的定义和使用</h3><p>接口中的常量格式</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> 数据类型 常量名称 <span class="token operator">=</span> 数据值；<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>接口中的常量，可以省略<code>public static final</code></li>
+<li>接口中的常量，必须进行赋值，且不可改变</li>
+<li>接口中常量的名称，使用完全大写的字母，用下划线进行分隔</li>
+<li>使用时直接使用<code>接口名称.常量名称</code>进行访问</li>
+</ul>
+<h3 id="接口内容小结"><a href="#接口内容小结" class="headerlink" title="接口内容小结"></a>接口内容小结</h3><p>在Java 9+版本中，接口的内容可以有：</p>
+<ol>
+<li><p>成员变量其实是常量，格式：<br>[public] [static] [final] 数据类型 常量名称 = 数据值;<br>注意：<br>常量必须进行赋值，而且一旦赋值不能改变。<br>常量名称完全大写，用下划线进行分隔。</p>
+</li>
+<li><p>接口中最重要的就是抽象方法，格式：<br>[public] [abstract] 返回值类型 方法名称(参数列表);<br>注意：实现类必须覆盖重写接口所有的抽象方法，除非实现类是抽象类。</p>
+</li>
+<li><p>从Java 8开始，接口里允许定义默认方法，格式：<br>[public] default 返回值类型 方法名称(参数列表) { 方法体 }<br>注意：默认方法也可以被覆盖重写</p>
+</li>
+<li><p>从Java 8开始，接口里允许定义静态方法，格式：<br>[public] static 返回值类型 方法名称(参数列表) { 方法体 }<br>注意：应该通过接口名称进行调用，不能通过实现类对象调用接口静态方法</p>
+</li>
+<li><p>从Java 9开始，接口里允许定义私有方法，格式：<br>普通私有方法：private 返回值类型 方法名称(参数列表) { 方法体 }<br>静态私有方法：private static 返回值类型 方法名称(参数列表) { 方法体 }<br>注意：private的方法只有接口自己才能调用，不能被实现类或别人使用。</p>
+</li>
+</ol>
+<h3 id="接口的多实现"><a href="#接口的多实现" class="headerlink" title="接口的多实现"></a>接口的多实现</h3><p>之前学过，在继承体系中，一个类只能继承一个父类。而对于接口而言，一个类是可以实现多个接口的，这叫做接口的多实现。并且，一个类能继承一个父类，同时实现多个接口。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> 类名 <span class="token punctuation">[</span><span class="token keyword">extends</span> 父类名<span class="token punctuation">]</span> <span class="token keyword">implements</span> 接口名<span class="token number">1</span><span class="token punctuation">,</span>接口名<span class="token number">2</span><span class="token punctuation">,</span>接口名<span class="token number">3.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 重写接口中抽象方法【必须】</span>
+    <span class="token comment">// 重写接口中默认方法【不重名时可选】</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>接口中，有多个抽象方法时，实现类必须<strong>重写所有抽象方法</strong>。如果抽象方法有重名的，<strong>只需要重写一次</strong>。</li>
+<li>接口中，有多个默认方法时，实现类都可继承使用。如果默认方法有重名的，<strong>必须重写一次</strong>。</li>
+<li>接口中，存在同名的静态方法并不会冲突，原因是只能通过各自接口名访问静态方法</li>
+<li>优先级问题：当一个类，既继承一个父类，又实现若干个接口时，父类中的成员方法与接口中的默认方法重名，子类<strong>就近选择执行父类</strong>的成员方法</li>
+</ul>
+<h3 id="接口的多继承"><a href="#接口的多继承" class="headerlink" title="接口的多继承"></a>接口的多继承</h3><p>对于接口而言，一个类是可以实现多个接口的，接口的实现采用<code>implements</code>关键字</p>
+<p>接口与接口之间是多继承的，接口的继承使用<code>extends</code>关键字</p>
+<ul>
+<li>多个父接口当中的抽象方法如果重复，没关系</li>
+<li>多个父接口当中的默认方法如果重复，那么子接口必须进行默认方法的覆盖重写<strong>需要带着default关键字</strong></li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">interface</span> <span class="token class-name">A</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"AAAAAAAAAAAAAAAAAAA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">interface</span> <span class="token class-name">B</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"BBBBBBBBBBBBBBBBBBB"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//接口的继承</span>
+<span class="token keyword">interface</span> <span class="token class-name">D</span> <span class="token keyword">extends</span> <span class="token class-name">A</span><span class="token punctuation">,</span><span class="token class-name">B</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   <span class="token comment">//default关键字不可省略</span>
+    	<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"DDDDDDDDDDDDDD"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>实现类重写接口默认方法时，default关键字不保留</p>
+<p>子接口重写接口默认方法是，default关键字保留</p>
+</blockquote>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>一个对象有多种形态，这就是对象的多态性,extends或者implements是多态性的前提</p>
+<p>格式：（父类引用指向子类对象）</p>
+<p><code>父类名称 对象名 = new 子类名称（）</code>；或者<code>接口名称 对象名 = new 实现类名称（）</code>；</p>
+<h3 id="多态中成员变量与方法的使用"><a href="#多态中成员变量与方法的使用" class="headerlink" title="多态中成员变量与方法的使用"></a>多态中成员变量与方法的使用</h3><ol>
+<li>直接通过对象名称访问成员变量，看等号左边是谁，优先用谁，没有则向上找（编译看左，运行看左）</li>
+<li>间接通过成员方法访问成员变量，看方法属于谁，就优先用谁，没有则向上找</li>
+<li>当使用多态方式调用方法时，首先检查父类中是否有该方法，<strong>如果没有，则编译错误</strong>（调用的方法必须是父类中有的方法）如果有，执行的是子类重写后方法。（编译看左，运行看右）</li>
+</ol>
+<h3 id="向上向下转型"><a href="#向上向下转型" class="headerlink" title="向上向下转型"></a>向上向下转型</h3><p><strong>向上转型</strong>：多态本身是子类类型向父类类型向上转换的过程，这个过程是默认的。</p>
+<p><strong>向下转型</strong>：父类类型向子类类型向下转换的过程，这个过程是强制的</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/05-%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8A%E4%B8%8B%E8%BD%AC%E5%9E%8B.png" alt="05-对象的上下转型"></p>
+<p><strong>向下转型的原因</strong>：当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误。也就是说，<strong>不能调用子类拥有，而父类没有的方法</strong>。编译都错误，更别说运行了。这也是多态给我们带来的一点”小麻烦”。所以，想要调用子类特有的方法，必须做向下转型。</p>
+<p>向下转型前先进行instanceof，判断格式：<code>对象 instanceof 类名称</code></p>
+<p>将会得到一个boolean值的结果，判断前面的对象能不能当做后面类型的实例。</p>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><p>final： 不可改变。可以用于修饰类、方法和变量。<br>类：被修饰的类，不能被继承。<br>方法：被修饰的方法，不能被重写。<br>变量：被修饰的变量，不能被重新赋值。</p>
+<p>final修饰的常量名称，一般都有书写规范，所有字母都大写。</p>
+<ul>
+<li>一个类如果是final的，那么其中所有的成员方法都无法进行覆盖重写（其不能被继承，但是它可以重写父类的方法）</li>
+<li>对于类、方法来说，abstract关键字和final关键字不能同时使用，因为矛盾</li>
+<li>对于<strong>基本数据类型，fina修饰后变量当中的数据值不可改变</strong>，对于引用类型来说，final修饰后变量当中的<strong>地址值不可改变，但是地址指向的内容可以变（String改名）</strong></li>
+<li>fina修饰成员变量，必须要进行手动赋值，要么使用直接赋值，要么通过构造方法进行赋值，二者选其一，且必须保证类中的所有重载构造方法都会对final的成员变量进行赋值。</li>
+</ul>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h2><p><img src="/images/java%E5%9F%BA%E7%A1%80/image-20210410131339492.png" alt="image-20210410131339492"></p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><h3 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java">修饰符 <span class="token keyword">class</span> 外部类 <span class="token punctuation">&#123;</span>
+    修饰符 <span class="token keyword">class</span> 内部类<span class="token punctuation">&#123;</span>
+    
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>访问特点</p>
+<p>内部类可以直接访问外部类的成员，包括私有成员。<br>外部类要访问内部类的成员，必须要建立内部类的对象。</p>
+</li>
+<li><p>使用成员内部类的两种方式：</p>
+<ol>
+<li>间接方式：在外部类的方法中，创建内部类对象使用内部类，然后main只是调用外部类方法</li>
+<li>直接范式：<code>外部类名.内部类名 对象名 = new 外部类型().new 内部类型()；</code></li>
+</ol>
+</li>
+<li><p>当外部类与内部类变量出现了重名，内部类访问外部类成员变量的方法：<code>外部类名称.this.外部类成员变量名</code></p>
+</li>
+</ul>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>如果一个类是定义在一个方法内部的，那么这就是一个局部内部类。只有在所属的方法才能使用它，出了该方法就不能再使用了。</p>
+<ul>
+<li>局部内部类如果希望访问所在方法的局部变量，那么这个局部变量必须是有效**<code>final</code>**的</li>
+</ul>
+<p>定义一个类，权限修饰符的使用规则：</p>
+<ol>
+<li>外部类：public / (default)</li>
+<li>成员内部类：public/protected/(default)/private</li>
+<li><strong>局部内部类</strong>：什么修饰符都不能写</li>
+</ol>
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>匿名内部类 ：是内部类的简化写法。它的本质是一个带具体实现的 <strong>父类或者父接口</strong>的 匿名的 <strong>子类对象</strong>。</p>
+<blockquote>
+<p>格式：</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">父类名或者接口名 对象名 <span class="token operator">=</span> <span class="token keyword">new</span> 父类名或者接口名<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//接口名称就是匿名内部类需要实现哪个接口</span>
+    <span class="token comment">// 方法重写</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	<span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意事项：</p>
+</blockquote>
+<ol>
+<li><p>匿名内部类，在【创建对象】时，只能使用唯一一次</p>
+</li>
+<li><p>匿名内部类与匿名对象不同，匿名对象，在【调用方法】时只能调用唯一一次，匿名内部类省略了【实现类/子类名称】，但是匿名对象省略了【对象名称】</p>
+</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">new</span> <span class="token function">obj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//接口名称就是匿名内部类需要实现哪个接口</span>
+    <span class="token comment">// 方法重写</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	<span class="token comment">// 执行语句</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//既是匿名内部类也是匿名对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="引用类型方法"><a href="#引用类型方法" class="headerlink" title="引用类型方法"></a>引用类型方法</h2><h3 id="class作为成员变量"><a href="#class作为成员变量" class="headerlink" title="class作为成员变量"></a>class作为成员变量</h3><p>类作为成员变量时，对它进行赋值的操作，实际上，是赋给它该类的一个对象。</p>
+<h3 id="interface作为成员变量"><a href="#interface作为成员变量" class="headerlink" title="interface作为成员变量"></a>interface作为成员变量</h3><p>接口作为成员变量时，对它进行赋值的操作，实际上，是赋给它该接口的一个<strong>子类对象</strong>。也就是实现类的对象，也可使用匿名内部类。</p>
+<h3 id="interface作为方法参数和返回值类型"><a href="#interface作为方法参数和返回值类型" class="headerlink" title="interface作为方法参数和返回值类型"></a>interface作为方法参数和返回值类型</h3><p>接口作为参数时，传递它的子类对象。<br>接口作为返回值类型时，返回它的子类对象。</p>
+<p>例如：<code>ArrayList </code>是 <code>java.util.List </code>接口的实现类。所以，当我们看见List 接口作为参数或者返回值类型时，当然可以将ArrayList 的对象进行传递或返回。</p>
+<h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><ul>
+<li><p><code>public String toString()</code>：返回该对象的字符串表示。toString方法返回该对象的字符串表示，其实该字符串内容就是对象的类型+@+内存地址值</p>
+<p>覆盖重写：在IntelliJ IDEA中，可以点击<code>Code</code>菜单中的<code>Generate...</code>，也可以使用快捷键<code>alt+insert</code>，点击<code>toString()</code>选项。选择需要包含的成员变量并确定。</p>
+</li>
+<li><p><code>public boolean equals(Object obj)</code>：指示其他某个对象是否与此对象“相等”。调用成员方法equals并指定参数为另一个对象，则可以判断这两个对象是否是相同的。</p>
+<p>默认进行地址值的比较，如果进行对象内容的比较需要覆盖重写，在IntelliJ IDEA中，可以使用<code>Code</code>菜单中的<code>Generate…</code>选项，也可以使用快捷键<code>alt+insert</code>，并选择<code>equals() and hashCode()</code>进行自动代码生成。</p>
+</li>
+<li><p><code>public static boolean equals(Object a, Object b)</code>:判断两个对象是否相等。Object的equals方法容易抛出空指针异常，而Objects类中的equals方法就优化了这个问题</p>
+</li>
+</ul>
+<h2 id="日期时间类"><a href="#日期时间类" class="headerlink" title="日期时间类"></a>日期时间类</h2><ul>
+<li><code>public Date()</code>：分配Date对象并初始化此对象，以表示分配它的时间（精确到毫秒）。输出当前时间格式。</li>
+<li><code>public Date(long date)</code>：分配Date对象并初始化此对象，以表示自从标准基准时间（称为“历元（epoch）”，即1970年1月1日00:00:00 GMT）以来的指定毫秒数。输出从历元起的毫秒值对应的时间格式。</li>
+<li><code>public long getTime()</code> 把日期对象转换成对应的时间毫秒值。输出从历元起到当前时刻的毫秒值</li>
+</ul>
+<h3 id="DateFormat类"><a href="#DateFormat类" class="headerlink" title="DateFormat类"></a>DateFormat类</h3><p>DateFormat为抽象类，不能直接使用，所以需要常用的子类<code>java.text.SimpleDateFormat</code>。这个类需要一个模式（格式）来指定格式化或解析的标准。构造方法为：</p>
+<ul>
+<li><p><code>public SimpleDateFormat(String pattern)</code>：用给定的模式和默认语言环境的日期格式符号构造SimpleDateFormat。参数pattern是一个字符串，代表日期时间的自定义格式。</p>
+</li>
+<li><p>DateFormat类的常用方法有：</p>
+<p><code>public String format(Date date)</code>：将Date对象格式化为字符串。</p>
+<p><code>public Date parse(String source)</code>：将字符串解析为Date对象。</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>text<span class="token punctuation">.</span></span><span class="token class-name">DateFormat</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>text<span class="token punctuation">.</span></span><span class="token class-name">SimpleDateFormat</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Date</span><span class="token punctuation">;</span>
+<span class="token comment">/*
+ 把Date对象转换成String
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo03DateFormatMethod</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Date</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 创建日期格式化对象,在获取格式化对象时可以指定风格</span>
+        <span class="token class-name">DateFormat</span> df <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy年MM月dd日"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> df<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2008年1月23日</span>
+        <span class="token class-name">Date</span> date <span class="token operator">=</span> df<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h3><p><code> Calendar cal = Calendar.getInstance();</code>:使用默认时区和语言环境获得一个日历</p>
+<p>根据Calendar类的API文档，常用方法有：</p>
+<ul>
+<li><code>public int get(int field)</code>：返回给定日历字段的值。<code>int year = cal.get(Calendar.YEAR);</code></li>
+<li><code>public void set(int field, int value)</code>：将给定的日历字段设置为给定值。</li>
+<li><code>public abstract void add(int field, int amount)</code>：根据日历的规则，为给定的日历字段添加或减去指定的时间量。</li>
+<li><code>public Date getTime()</code>：返回一个表示此Calendar时间值（从历元到现在的毫秒偏移量）的Date对象。</li>
+</ul>
+<p>Calendar类中提供很多成员常量，代表给定的日历字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YEAR</td>
+<td>年</td>
+</tr>
+<tr>
+<td>MONTH</td>
+<td>月（从0开始，可以+1使用）</td>
+</tr>
+<tr>
+<td>DAY_OF_MONTH</td>
+<td>月中的天（几号）</td>
+</tr>
+<tr>
+<td>HOUR</td>
+<td>时（12小时制）</td>
+</tr>
+<tr>
+<td>HOUR_OF_DAY</td>
+<td>时（24小时制）</td>
+</tr>
+<tr>
+<td>MINUTE</td>
+<td>分</td>
+</tr>
+<tr>
+<td>SECOND</td>
+<td>秒</td>
+</tr>
+<tr>
+<td>DAY_OF_WEEK</td>
+<td>周中的天（周几，周日为1，可以-1使用）</td>
+</tr>
+</tbody></table>
+<p>注意事项：在Calendar类中，月份的表示是以0-11代表1-12月。</p>
+<h2 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h2><ul>
+<li><p><code>public static long currentTimeMillis()</code>：返回以毫秒为单位的当前时间。</p>
+<p>用法：<code>System.currentTimeMillis()</code></p>
+</li>
+<li><p><code>public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</code>：将数组中指定的数据拷贝到另一个数组中。** 数组拷贝覆盖**</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数序号</th>
+<th>参数名称</th>
+<th>参数类型</th>
+<th>参数含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>src</td>
+<td>Object</td>
+<td>源数组</td>
+</tr>
+<tr>
+<td>2</td>
+<td>srcPos</td>
+<td>int</td>
+<td>源数组索引起始位置</td>
+</tr>
+<tr>
+<td>3</td>
+<td>dest</td>
+<td>Object</td>
+<td>目标数组</td>
+</tr>
+<tr>
+<td>4</td>
+<td>destPos</td>
+<td>int</td>
+<td>目标数组索引起始位置</td>
+</tr>
+<tr>
+<td>5</td>
+<td>length</td>
+<td>int</td>
+<td>复制元素个数</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> src <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span> src<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> dest<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">/*代码运行后：两个数组中的元素发生了变化
+       src数组元素[1,2,3,4,5]
+       dest数组元素[1,2,3,9,10]
+      */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="StringBuilder类"><a href="#StringBuilder类" class="headerlink" title="StringBuilder类"></a>StringBuilder类</h2><p>String类中：字符串是常量，它们的值在创建后不能被更改。</p>
+<p>如果对字符串进行拼接操作，每次拼接，都会构建一个新的String对象，既耗时，又浪费空间。为了解决这一问题，可以使用<code>java.lang.StringBuilder</code>类。</p>
+<p>StringBuilder又称为可变字符序列，它是一个类似于 String 的字符串缓冲区，即它是一个容器，通过某些方法调用可以改变该序列的长度和内容。</p>
+<blockquote>
+<p>构造方法</p>
+</blockquote>
+<ul>
+<li><code>public StringBuilder()</code>：构造一个空的StringBuilder容器。</li>
+<li><code>public StringBuilder(String str)</code>：构造一个StringBuilder容器，并将字符串添加进去。（String——&gt;StringBuilder）</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringBuilderDemo</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">StringBuilder</span> sb1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>sb1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// (空白)</span>
+        <span class="token comment">// 使用带参构造</span>
+        <span class="token class-name">StringBuilder</span> sb2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"itcast"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>sb2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// itcast</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>常用方法</p>
+</blockquote>
+<ul>
+<li><code>public StringBuilder append(...)</code>：添加任意类型数据的字符串形式，并返回当前对象自身。</li>
+<li><code>public String toString()</code>：将当前StringBuilder对象转换为String对象。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo02StringBuilder</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">//创建对象</span>
+		<span class="token class-name">StringBuilder</span> builder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//public StringBuilder append(任意类型)</span>
+		<span class="token class-name">StringBuilder</span> builder2 <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//对比一下</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"builder:"</span><span class="token operator">+</span>builder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"builder2:"</span><span class="token operator">+</span>builder2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>builder <span class="token operator">==</span> builder2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span>
+	    <span class="token comment">// 可以添加 任何类型</span>
+		builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// 在我们开发中，会遇到调用一个方法后，返回一个对象的情况。然后使用返回的对象继续调用方法。</span>
+        <span class="token comment">// 这种时候，我们就可以把代码现在一起，如append方法一样，代码如下</span>
+		<span class="token comment">//链式编程</span>
+		builder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"builder:"</span><span class="token operator">+</span>builder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>过toString方法，StringBuilder对象将会转换为不可变的String对象。如：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"World"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"Java"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 调用方法</span>
+      <span class="token class-name">String</span> str <span class="token operator">=</span> sb<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h2><p>Java提供了两个类型系统，基本类型与引用类型，使用基本类型在于效率，然而很多情况，会创建对象使用，因为对象可以做更多的功能，如果想要我们的基本类型像对象一样操作，就可以使用基本类型对应的包装类。</p>
+<p>基本类型与对应的包装类对象之间，来回转换的过程称为”装箱“与”拆箱“：</p>
+<ul>
+<li><p><strong>装箱</strong>：从基本类型转换为对应的包装类对象。</p>
+</li>
+<li><p><strong>拆箱</strong>：从包装类对象转换为对应的基本类型。</p>
+</li>
+</ul>
+<p>基本数值—-&gt;包装对象</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> i <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//使用构造函数函数</span>
+<span class="token class-name">Integer</span> iii <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//使用包装类中的valueOf方法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>包装对象—-&gt;基本数值</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> num <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="基本类型与字符串之间的转换"><a href="#基本类型与字符串之间的转换" class="headerlink" title="基本类型与字符串之间的转换"></a>基本类型与字符串之间的转换</h3><ul>
+<li><p>基本类型转为String</p>
+<ol>
+<li>基本类型的值+“ ”   </li>
+<li>包装类的静态方法toString(参数) <code>static String toString(参数)</code> </li>
+<li>String 类的静态方法valueOf(参数)  <code>static String valueOf(参数)</code> String转换成对应的基本类型 </li>
+</ol>
+</li>
+<li><p>String转换成对应的基本类型 </p>
+<p>使用包装类的静态方法parseXXX(“字符串”)</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s1 <span class="token operator">=</span> num <span class="token operator">+</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s3 <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> num2 <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token string">"100"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><p>集合和数组既然都是容器，它们有啥区别呢？</p>
+<ul>
+<li>数组的长度是固定的。集合的长度是可变的。</li>
+<li>数组中存储的是同一类型的元素，可以存储基本数据类型值。集合存储的都是对象。而且对象的类型可以不一致。在开发中一般当对象多的时候，使用集合进行存储。</li>
+</ul>
+<h3 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h3><p>集合按照其存储结构可以分为两大类，分别是单列集合<code>java.util.Collection</code>和双列集合<code>java.util.Map</code>，</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/01_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D.png" alt="img"></p>
+<h3 id="Collection-常用功能"><a href="#Collection-常用功能" class="headerlink" title="Collection 常用功能"></a>Collection 常用功能</h3><p>Collection是所有单列集合的父接口，因此在Collection中定义了单列集合(List和Set)通用的一些方法，这些方法可用于操作所有的单列集合。方法如下：</p>
+<ul>
+<li><code>public boolean add(E e)</code>：  把给定的对象添加到当前集合中 。</li>
+<li><code>public void clear()</code> :清空集合中所有的元素。</li>
+<li><code>public boolean remove(E e)</code>: 把给定的对象在当前集合中删除。</li>
+<li><code>public boolean contains(E e)</code>: 判断当前集合中是否包含给定的对象。</li>
+<li><code>public boolean isEmpty()</code>: 判断当前集合是否为空。</li>
+<li><code>public int size()</code>: 返回集合中元素的个数。</li>
+<li><code>public Object[] toArray()</code>: 把集合中的元素，存储到数组中。</li>
+</ul>
+<h3 id="Collections常用功能"><a href="#Collections常用功能" class="headerlink" title="Collections常用功能"></a>Collections常用功能</h3><p>两者区别：</p>
+<p>Collections是个java.util下的类，它包含有各种有关集合操作的静态方法。</p>
+<p>Collection是个java.util下的接口，它是各种集合结构的父接口。</p>
+<ul>
+<li><code>public static &lt;T&gt; boolean addAll(Collection&lt;T&gt; c, T... elements)  </code>:往集合中添加一些元素。</li>
+<li><code>public static void shuffle(List&lt;?&gt; list) 打乱顺序</code>:打乱集合顺序。</li>
+<li><code>public static &lt;T&gt; void sort(List&lt;T&gt; list)</code>:将集合中元素按照默认规则排序（升序排序）。</li>
+<li><code>public static &lt;T&gt; void sort(List&lt;T&gt; list，Comparator&lt;? super T&gt; )</code>:将集合中元素按照指定规则排序。</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;();
+Collections.addAll(list, 5, 222, 1，2); &#x2F;&#x2F;静态方法可以直接通过类名进行调用
+Collections.shuffle(list);
+Collections.sort(list); &#x2F;&#x2F;升序<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Comparable和Comparator"><a href="#Comparable和Comparator" class="headerlink" title="Comparable和Comparator"></a>Comparable和Comparator</h3><p><strong>Comparable</strong>：强行对实现它的每个类的对象进行整体排序。这种排序被称为类的自然排序。用<code>sort(List&lt;T&gt; list)</code>进行排序时，需要实现Comparable类（implements Comparable&lt;类&gt;）重写接口中的方法compareTo()。</p>
+<p>排序规则：<code>return 自己（this）-参数</code>:升序</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token keyword">implements</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span><span class="token class-name">Student</span> o<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">-</span>o<span class="token punctuation">.</span>age<span class="token punctuation">;</span><span class="token comment">//升序</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Comparator</strong>强行对某个对象进行整体排序。用<code>sort(List&lt;T&gt; list，Comparator&lt;? super T&gt; )</code>进行排序时，采用匿名内部类。规则：<code>o1-o2</code>:升序</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Comparator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           <span class="token annotation punctuation">@Override</span>
+           <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">String</span> o1<span class="token punctuation">,</span> <span class="token class-name">String</span> o2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+               <span class="token keyword">return</span> o1<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">-</span> o2<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token punctuation">&#125;</span>
+       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Iterator迭代器"><a href="#Iterator迭代器" class="headerlink" title="Iterator迭代器"></a>Iterator迭代器</h2><p><code>public Iterator iterator()</code>: 获取集合对应的迭代器，用来遍历集合中的元素的。</p>
+<p>Iterator接口的常用方法如下：</p>
+<ul>
+<li><code>public E next()</code>:返回迭代的下一个元素。</li>
+<li><code>public boolean hasNext()</code>:如果仍有元素可以迭代，则返回 true。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IteratorDemo</span> <span class="token punctuation">&#123;</span>
+  	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 使用多态方式 创建对象</span>
+        <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> coll <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 添加元素到集合</span>
+        coll<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"串串星人"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        coll<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"吐槽星人"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        coll<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"汪星人"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//遍历</span>
+        <span class="token comment">//使用迭代器 遍历   每个集合对象都有自己的迭代器</span>
+        <span class="token class-name">Iterator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> it <span class="token operator">=</span> coll<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//  泛型指的是 迭代出 元素的数据类型</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//判断是否有迭代元素</span>
+            <span class="token class-name">String</span> s <span class="token operator">=</span> it<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取迭代出的元素</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+  	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>在调用Iterator的next方法之前，迭代器的索引（指针）位于第一个元素之前，不指向任何元素，当第一次调用迭代器的next方法后，迭代器的索引会向后移动一位，指向第一个元素并将该元素返回，当再次调用next方法时，迭代器的索引会指向第二个元素并将该元素返回，依此类推，直到hasNext方法返回false，表示到达了集合的末尾，终止对元素的遍历。</p>
+<h3 id="for-each（增强for）"><a href="#for-each（增强for）" class="headerlink" title="for each（增强for）"></a>for each（增强for）</h3><ul>
+<li><p>它的内部原理其实是个Iterator迭代器，不能对集合中的元素进行增删操作，仅仅作为遍历操作出现，目标只能是Collection或者是数组</p>
+</li>
+<li><p>所有的单列集合都可以使用增强for</p>
+</li>
+</ul>
+<p>格式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span><span class="token punctuation">(</span>元素的数据类型  变量 <span class="token operator">:</span> <span class="token class-name">Collection</span>集合or数组<span class="token punctuation">)</span><span class="token punctuation">&#123;</span> 
+  	<span class="token comment">//写操作代码</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>集合中是可以存放任意对象的，只要把对象存储集合后，那么这时他们都会被提升成Object类型，变为多态，不能访问子类特有的方法。此时采用泛型避免了类型强转的麻烦。</p>
+<p>泛型，用来灵活地将数据类型应用到不同的类、方法、接口当中。将数据类型作为参数进行传递。</p>
+<blockquote>
+<p>一般在创建对象时，将未知的类型确定具体的类型。当没有指定泛型时，默认类型为<strong>Object类型</strong>。</p>
+</blockquote>
+<h3 id="定义和使用泛型"><a href="#定义和使用泛型" class="headerlink" title="定义和使用泛型"></a>定义和使用泛型</h3><h4 id="含有泛型的类"><a href="#含有泛型的类" class="headerlink" title="含有泛型的类"></a>含有泛型的类</h4><p>定义格式：</p>
+<pre class="line-numbers language-none"><code class="language-none">修饰符 class 类名&lt;代表泛型的变量&gt; &#123;  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>在创建对象的时候确定泛型</strong></p>
+<p> 例如，<code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();</code></p>
+<h4 id="含有泛型的方法"><a href="#含有泛型的方法" class="headerlink" title="含有泛型的方法"></a>含有泛型的方法</h4><p>定义格式：</p>
+<pre class="line-numbers language-none"><code class="language-none">修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数列表（使用泛型）)&#123;  &#125;
+&#x2F;&#x2F; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>调用方法时，确定泛型的类型，参数传递什么类型，泛型就是什么类型</strong></p>
+<h4 id="含有泛型的接口"><a href="#含有泛型的接口" class="headerlink" title="含有泛型的接口"></a>含有泛型的接口</h4><p>定义格式：</p>
+<pre class="line-numbers language-none"><code class="language-none">修饰符 interface接口名&lt;代表泛型的变量&gt; &#123;  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>定义实现类时确定泛型的类型</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyImp1</span> <span class="token keyword">implements</span> <span class="token class-name">MyGenericInterface</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>始终不确定泛型的类型，直到创建对象时，确定泛型的类型</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyImp2</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">></span></span> <span class="token keyword">implements</span> <span class="token class-name">MyGenericInterface</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//创建对象</span>
+<span class="token class-name">MyImp2</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span>  my <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyImp2</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="泛型通配符"><a href="#泛型通配符" class="headerlink" title="泛型通配符"></a>泛型通配符</h3><ul>
+<li><p>当使用泛型类或者接口时，传递的数据中，泛型类型不确定，可以通过通配符&lt;?&gt;表示。但是一旦使用泛型的通配符后，只能使用Object类中的共性方法，集合中元素自身方法无法使用。</p>
+</li>
+<li><p>泛型<strong>不存在继承关系</strong> Collection<Object> list = new ArrayList<String>();这种是错误的。</String></Object></p>
+</li>
+<li><p>泛型的通配符:<strong>不知道使用什么类型来接收的时候,此时可以使用?,?表示未知通配符。</strong></p>
+</li>
+<li><p>此时只能接受数据,不能往该集合中存储数据。</p>
+</li>
+</ul>
+<h3 id="受限泛型"><a href="#受限泛型" class="headerlink" title="受限泛型"></a>受限泛型</h3><p><strong>泛型的上限</strong>：</p>
+<ul>
+<li><strong>格式</strong>： <code>类型名称 &lt;? extends 类 &gt; 对象名称</code></li>
+<li><strong>意义</strong>： <code>只能接收该类型及其子类</code></li>
+</ul>
+<p><strong>泛型的下限</strong>：</p>
+<ul>
+<li><strong>格式</strong>： <code>类型名称 &lt;? super 类 &gt; 对象名称</code></li>
+<li><strong>意义</strong>： <code>只能接收该类型及其父类型</code></li>
+</ul>
+<p>比如：现已知Object类，String 类，Number类，Integer类，其中Number是Integer的父类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 泛型的上限：此时的泛型?，必须是Number类型或者Number类型的子类</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">getElement1</span><span class="token punctuation">(</span><span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Number</span><span class="token punctuation">></span></span> coll<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token comment">// 泛型的下限：此时的泛型?，必须是Number类型或者Number类型的父类</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">getElement2</span><span class="token punctuation">(</span><span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> <span class="token class-name">Number</span><span class="token punctuation">></span></span> coll<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h2><p>使用前提：当方法的参数类表数据类型已经确定，但是参数的个数不确定，可以使用可变参数、</p>
+<p>使用格式：定义方法时使用<code>修饰符 返回值类型 方法名 （数据类型 ... 变量名）&#123;&#125;</code></p>
+<p>原理：可变参数底层是一个数组，根据传递参数个数不同，会创建不同长度的数组，来存储这些参数</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// int sum2 = getSum(6, 7, 2, 12, 2121); 调用方法</span>
+
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">getSum</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">:</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sum <span class="token operator">+=</span> a<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用注意事项：</p>
+<ol>
+<li>一个方法的参数列表，最多只能有一个可变参数</li>
+<li>如果方法的参数有多个，那么可变参数必须写在参数列表的末尾</li>
+<li>如果为Object … obj 可接受任意类型的多个参数</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p><strong>栈</strong>：<strong>stack</strong>,又称堆栈，它是运算受限的线性表，其限制是仅允许在标的一端进行插入和删除操作，不允许在其他任何位置进行添加、查找、删除等操作。</p>
+<p>特点：先进后出，栈的入口、出口的都是栈的顶端位置。</p>
+<blockquote>
+<p>LinkedList：入栈：push或者addFirst  出栈：pop或者removeFirst  获取栈顶元素：peek</p>
+</blockquote>
+<p><strong>队列</strong>：<strong>queue</strong>,简称队，它同堆栈一样，也是一种运算受限的线性表，其限制是仅允许在表的一端进行插入，而在表的另一端进行删除。</p>
+<p>特点：先进先出，队列的入口、出口各占一侧</p>
+<blockquote>
+<p> LinkedList：入队：offer（尾部插入），出队：poll 或者remove 获取队头元素：element</p>
+</blockquote>
+<p><strong>数组</strong>:<strong>Array</strong>,是有序的元素序列，数组是在内存中开辟一段<strong>连续</strong>的空间，并在此空间存放元素。</p>
+<p>特点：</p>
+<p>​    1. 查找元素快：数组的地址是连续的，通过数组的首地址可以找到数组，通过索引，可以快速访问指定位置的元素。</p>
+<ol start="2">
+<li>增删元素慢：数组的长度是固定的，想要增加/删除一个元素，必须创建一个新数组，把原数组的数据复制过来。把新数组的地址赋给原变量，原数组会在内存中被销毁（垃圾回收）</li>
+</ol>
+<p><strong>链表</strong>:<strong>linked list</strong>,由一系列结点node（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。我们常说的链表结构有单向链表与双向链表。</p>
+<p>查询慢：链表中的地址不是连续的，每次查询元素都必须从头开始查询</p>
+<p>增删元素快：</p>
+<ul>
+<li><p>增加元素：只需要修改连接下个元素的地址即可。</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/%E5%A2%9E%E5%8A%A0%E7%BB%93%E7%82%B9.png"></p>
+</li>
+<li><p>删除元素：只需要修改连接下个元素的地址即可。</p>
+</li>
+</ul>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/%E5%88%A0%E9%99%A4%E7%BB%93%E7%82%B9.bmp"></p>
+<p><strong>红黑树</strong></p>
+<p>红黑树的约束:</p>
+<ol>
+<li>节点可以是红色的或者黑色的</li>
+</ol>
+<ol start="2">
+<li>根节点是黑色的</li>
+</ol>
+<ol start="3">
+<li>叶子节点(特指空节点)是黑色的</li>
+<li>每个红色节点的子节点都是黑色的</li>
+<li>任何一个节点到其每一个叶子节点的所有路径上黑色节点数相同</li>
+</ol>
+<p>红黑树的特点:</p>
+<p>​    速度特别快,趋近平衡树,查找叶子元素最少和最多次数不多于二倍</p>
+<h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p>Collection中的常用几个子类（<code>java.util.List</code>集合、<code>java.util.Set</code>集合）</p>
+<p>List接口特点：</p>
+<ol>
+<li>它是一个元素存取有序的集合。例如，存元素的顺序是11、22、33。那么集合中，元素的存储就是按照11、22、33的顺序完成的）。</li>
+<li>它是一个带有索引的集合，通过索引就可以精确的操作集合中的元素（与数组的索引是一个道理）。</li>
+<li>集合中可以有重复的元素，通过元素的equals方法，来比较是否为重复的元素。</li>
+</ol>
+<h3 id="List接口中常用方法"><a href="#List接口中常用方法" class="headerlink" title="List接口中常用方法"></a>List接口中常用方法</h3><ul>
+<li><code>public void add(int index, E element)</code>: 将指定的元素，添加到该集合中的指定位置上。</li>
+<li><code>public E get(int index)</code>:返回集合中指定位置的元素。</li>
+<li><code>public E remove(int index)</code>: 移除列表中指定位置的元素, 返回的是被移除的元素。</li>
+<li><code>public E set(int index, E element)</code>:用指定元素替换集合中指定位置的元素,返回值的更新前的元素。</li>
+</ul>
+<h3 id="List的子类"><a href="#List的子类" class="headerlink" title="List的子类"></a>List的子类</h3><h4 id="ArrayList集合"><a href="#ArrayList集合" class="headerlink" title="ArrayList集合"></a>ArrayList集合</h4><p><code>java.util.ArrayList</code>集合数据存储的结构是<strong>数组结构</strong>，每增删一个元素，底层都要调用数组复制的方法。<strong>元素增删慢，查找快</strong>，由于日常开发中使用最多的功能为查询数据、遍历数据，所以<code>ArrayList</code>是最常用的集合。（多线程，实现是不同步的）</p>
+<h4 id="LinkedList集合"><a href="#LinkedList集合" class="headerlink" title="LinkedList集合"></a>LinkedList集合</h4><p>集合数据存储的结构是链表结构。方便元素添加、删除的集合，LinkedList是一个双向链表（多线程的，实现是不同步的）</p>
+<ul>
+<li><code>public void addFirst(E e)</code>:将指定元素插入此列表的开头。 等效于push方法</li>
+<li><code>public void addLast(E e)</code>:将指定元素添加到此列表的结尾。 等效于add方法</li>
+<li><code>public E getFirst()</code>:返回此列表的第一个元素。</li>
+<li><code>public E getLast()</code>:返回此列表的最后一个元素。</li>
+<li><code>public E removeFirst()</code>:移除并返回此列表的第一个元素。等效于pop方法</li>
+<li><code>public E removeLast()</code>:移除并返回此列表的最后一个元素。</li>
+<li><code>public E pop()</code>:从此列表所表示的堆栈处弹出一个元素。</li>
+<li><code>public void push(E e)</code>:将元素推入此列表所表示的堆栈。</li>
+<li><code>public boolean isEmpty()</code>：如果列表不包含元素，则返回true。</li>
+</ul>
+<h4 id="vector集合"><a href="#vector集合" class="headerlink" title="vector集合"></a>vector集合</h4><p>1.0版本最早期的集合，可增长的数组，与ArrayList集合类似，只不过是单线程的（实现是同步的）</p>
+<h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p>与<code>List</code>接口不同的是，<code>Set</code>接口中<strong>元素无序</strong>，并且都会以某种规则保证存入的元素<strong>不出现重复</strong>，此外，<strong>没有索引</strong>不能使用for循环索引进行遍历。</p>
+<p><code>Set</code>集合有多个子类，这里我们介绍其中的<code>java.util.HashSet</code>、<code>java.util.LinkedHashSet</code>这两个集合。</p>
+<h3 id="Hashset"><a href="#Hashset" class="headerlink" title="Hashset"></a>Hashset</h3><p><code>java.util.HashSet</code>是<code>Set</code>接口的一个实现类，它所存储的元素是不可重复的，并且元素都是无序的(即存取顺序不一致)。</p>
+<p><code>HashSet</code>是根据对象的哈希值来确定元素在集合中的存储位置，因此具有良好的存取和查找性能。</p>
+<h3 id="HashSet集合存储数据的结构（哈希表）"><a href="#HashSet集合存储数据的结构（哈希表）" class="headerlink" title="HashSet集合存储数据的结构（哈希表）"></a>HashSet集合存储数据的结构（哈希表）</h3><p>在<strong>JDK1.8</strong>之前，哈希表底层采用数组+链表实现，即使用链表处理冲突，同一hash值的链表都存储在一个链表里。但是当位于一个桶中的元素较多，即hash值相等的元素较多时，通过key值依次查找的效率较低。而JDK1.8中，哈希表存储采用数组+链表+红黑树实现，当链表长度超过阈值（8）时，将链表转换为红黑树，这样大大减少了查找时间。</p>
+<p>简单的来说，哈希表是由数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下图所示。<img src="/images/java%E5%9F%BA%E7%A1%80/%E5%93%88%E5%B8%8C%E8%A1%A8.png"></p>
+<p>保证元素唯一性的方式依赖于：<code>hashCode</code>与<code>equals</code>方法。</p>
+<p>HashSet集合存储数据的流程图：</p>
+<p><img src="/images/java%E5%9F%BA%E7%A1%80/%E5%93%88%E5%B8%8C%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="img"></p>
+<h3 id="HashSet存储自定义类型元素"><a href="#HashSet存储自定义类型元素" class="headerlink" title="HashSet存储自定义类型元素"></a>HashSet存储自定义类型元素</h3><p>给HashSet中存放自定义类型元素时，需要重写对象中的hashCode和equals方法，建立自己的比较方式，才能保证HashSet集合中的对象唯一</p>
+<p>默认进行地址值的比较，如果进行对象内容的比较需要覆盖重写，在IntelliJ IDEA中，可以使用<code>Code</code>菜单中的<code>Generate…</code>选项，也可以使用快捷键<code>alt+insert</code>，并选择<code>equals() and hashCode()</code>进行自动代码生成。</p>
+<h3 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h3><p>在HashSet下面有一个子类<code>java.util.LinkedHashSet</code>，它是链表和哈希表组合的一个数据存储结构，，多了一条链表记录元素的存储顺序，保证了元素<strong>有序</strong></p>
+<h3 id="TreeSet与HashSet的区别"><a href="#TreeSet与HashSet的区别" class="headerlink" title="TreeSet与HashSet的区别"></a>TreeSet与HashSet的区别</h3><p>一、实现方式</p>
+<p>HashSet：HashSet是哈希表实现的。</p>
+<p>TreeSet：TreeSet是二叉树实现的。</p>
+<p>二、数据是否有序</p>
+<p>HashSet：HashSet中的数据是无序的。</p>
+<p>TreeSet：Treeset中的数据是自动排好序的。</p>
+<p>三、是否可以放入null值</p>
+<p>HashSet：可以放入null，但只能放入一个null。 </p>
+<p>TreeSet：不允许放入null值。</p>
+<h2 id="Map集合"><a href="#Map集合" class="headerlink" title="Map集合"></a>Map集合</h2><p>集合按照其存储结构可以分为两大类，分别是单列集合<code>java.util.Collection</code>和双列集合<code>java.util.Map</code></p>
+<ol>
+<li>Map集合是一个双列集合，一个元素包含两个值（一个key，一个value）</li>
+<li>Map集合中的元素，key和value的数据类型可以相同，也可以不同</li>
+<li>Map集合中的元素，key是不允许重复的，value是可以重复的，key如果重复，value值会进行覆盖</li>
+<li>Map集合中的元素，key和value是一一对应的</li>
+</ol>
+<h3 id="Map常用的子类"><a href="#Map常用的子类" class="headerlink" title="Map常用的子类"></a>Map常用的子类</h3><ul>
+<li>**HashMap&lt;K,V&gt;**：底层是哈希表，查询的速度特别快。存储数据采用的哈希表结构，元素的存取顺序不能保证一致。由于要保证键的唯一、不重复，需要重写键的hashCode()方法、equals()方法。</li>
+<li>**LinkedHashMap&lt;K,V&gt;**：HashMap下有个子类LinkedHashMap，存储数据采用的哈希表结构+链表结构。通过链表结构可以保证元素的存取顺序一致，保证迭代的顺序；通过哈希表结构可以保证的键的唯一、不重复，需要重写键的hashCode()方法、equals()方法。</li>
+</ul>
+<h3 id="Map接口中的常用方法"><a href="#Map接口中的常用方法" class="headerlink" title="Map接口中的常用方法"></a>Map接口中的常用方法</h3><ul>
+<li><code>public V put(K key, V value)</code>:  把指定的键与指定的值添加到Map集合中。</li>
+<li><code>public V remove(Object key)</code>: 把指定的键 所对应的键值对元素 在Map集合中删除，返回被删除元素的值。</li>
+<li><code>public V get(Object key)</code> 根据指定的键，在Map集合中获取对应的值。</li>
+<li><code>boolean containsKey(Object key)  </code> 判断集合中是否包含指定的键。</li>
+<li><code>public Set&lt;K&gt; keySet()</code>: 获取Map集合中所有的键，存储到Set集合中。</li>
+<li><code>public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code>: 获取到Map集合中所有的键值对对象的集合(Set集合)。</li>
+</ul>
+<blockquote>
+<p>使用put方法时，若指定的键(key)在集合中没有，则没有这个键对应的值，返回null，并把指定的键值添加到集合中； 若指定的键(key)在集合中存在，则返回值为集合中键对应的值（被替换的值），并把指定键所对应的值，替换成指定的新值。 </p>
+</blockquote>
+<h3 id="Map集合遍历"><a href="#Map集合遍历" class="headerlink" title="Map集合遍历"></a>Map集合遍历</h3><p><strong>键找值方式</strong>：即通过元素中的键，获取键所对应的值</p>
+<p>分析步骤：</p>
+<ol>
+<li>获取Map中所有的键，由于键是唯一的，所以返回一个Set集合存储所有的键。方法提示:<code>keyset()</code></li>
+<li>遍历键的Set集合，得到每一个键。</li>
+<li>根据键，获取键所对应的值。方法提示:<code>get(K key)</code></li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
+<span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> keys <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 遍历键集 得到 每一个键</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> key <span class="token operator">:</span> keys<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          	<span class="token comment">//key  就是键</span>
+            <span class="token comment">//获取对应值</span>
+            <span class="token class-name">String</span> value <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>key<span class="token operator">+</span><span class="token string">"的CP是："</span><span class="token operator">+</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>使用Entry对象遍历</strong></p>
+<p><strong>Entry对象</strong>：<code>Map</code>中存放的是两种对象，一种称为<strong>key</strong>(键)，一种称为<strong>value</strong>(值)，它们在在<code>Map</code>中是一一对应关系，这一对对象又称做<code>Map</code>中的一个<code>Entry(项)</code>。<code>Entry</code>将键值对的对应关系封装成了对象。即键值对对象，这样我们在遍历<code>Map</code>集合时，就可以从每一个键值对（<code>Entry</code>）对象中获取对应的键与对应的值。</p>
+<p>在Map集合中也提供了获取所有Entry对象的方法：</p>
+<ul>
+<li><code>public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code>: 获取到Map集合中所有的键值对对象的集合(Set集合)。</li>
+</ul>
+<p>Entry对象提供了获取对应键和对应值得方法：</p>
+<ul>
+<li><code>public K getKey()</code>：获取Entry对象中的键。</li>
+<li><code>public V getValue()</code>：获取Entry对象中的值。</li>
+</ul>
+<p>遍历步骤：</p>
+<ol>
+<li><p> 获取Map集合中，所有的键值对(Entry)对象，以Set集合形式返回。方法提示:<code>entrySet()</code>。</p>
+</li>
+<li><p> 遍历包含键值对(Entry)对象的Set集合，得到每一个键值对(Entry)对象。</p>
+</li>
+<li><p> 通过键值对(Entry)对象，获取Entry对象中的键与值。  方法提示:<code>getkey() getValue()</code>     </p>
+</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Entry</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> entrySet <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//存储Entry对象的一个集合</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Entry</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> entry <span class="token operator">:</span> entrySet<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+           	<span class="token comment">// 解析 Entry&lt;String, String> 代表Entry类型</span>
+            <span class="token class-name">String</span> key <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">String</span> value <span class="token operator">=</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>key<span class="token operator">+</span><span class="token string">"的CP是:"</span><span class="token operator">+</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="HashMap存储自定义类型数据"><a href="#HashMap存储自定义类型数据" class="headerlink" title="HashMap存储自定义类型数据"></a>HashMap存储自定义类型数据</h3><p>当给HashMap中存放自定义对象时，</p>
+<p>如果自定义对象作为key存在，这时要保证对象唯一，必须复写对象的hashCode和equals方法</p>
+<p>如果String类型作为Key，因为String类重写hashCode和equals方法所以可以保证key唯一</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span>map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>在HashMap下面有一个子类LinkedHashMap，它是链表和哈希表组合的一个数据存储结构。</p>
+<p>具有可预知的迭代顺序，有序集合，存取顺序一样</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>HashTable与HashMap的区别：</p>
+<p> Hashtable:底层也是一个哈希表,是一个<strong>线程安全的集合,是单线程集合,速度慢</strong><br> HashMap:底层是一个哈希表,是一个<strong>线程不安全的集合,是多线程的集合,速度快</strong></p>
+<p>HashMap集合(之前学的所有的集合):<strong>可以存储null值,null键</strong><br>Hashtable集合,<strong>不能存储null值,null键</strong> //空指针异常</p>
+<p>Hashtable和Vector集合一样,在<strong>jdk1.2</strong>版本之后被更先进的集合(HashMap,ArrayList)取代了<br>Hashtable的子类<strong>Properties</strong>依然活跃在历史舞台<br><strong>Properties集合是一个唯一和IO流相结合的集合</strong></p>
+<h2 id="JDK9对集合添加的优化"><a href="#JDK9对集合添加的优化" class="headerlink" title="JDK9对集合添加的优化"></a>JDK9对集合添加的优化</h2><p>List接口,Set接口,Map接口:里边增加了一个静态的方法of,可以给集合一次性添加多个元素<br>        <code>static &lt;E&gt; List&lt;E&gt; of(E... elements)</code></p>
+<p>使用前提:</p>
+<p>​        当集合中存储的元素的个数已经确定了,不在改变时使用</p>
+<p> 注意:<br>        1.of方法只适用于List接口,Set接口,Map接口,不适用于接接口的实现类(ArrayList，HashMap)<br>        2.of方法的返回值是一个不能改变的集合,集合不能再使用add,put方法添加元素,会抛出异常<br>        3.Set接口和Map接口在调用of方法的时候,不能有重复的元素,否则会抛出异常</p>
+<p><code>List&lt;String&gt; list = List.of(&quot;a&quot;, &quot;b&quot;, &quot;a&quot;, &quot;c&quot;, &quot;d&quot;);</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java%E5%9F%BA%E7%A1%80/" rel="tag"># java基础</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag"># 编程语言</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/23/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" rel="prev" title="算法笔记">
+                  <i class="fa fa-chevron-left"></i> 算法笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王延</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
